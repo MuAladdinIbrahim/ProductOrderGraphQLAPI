@@ -12,5 +12,6 @@ export default interface IProduct {
     findById(id: string):Promise<IProduct>
     // findAndRemove(id: string):Promise<IProduct>
     findByName(name: string):Promise<any>
+    addProductToCart(product:IProduct):Promise<any>
 
 }

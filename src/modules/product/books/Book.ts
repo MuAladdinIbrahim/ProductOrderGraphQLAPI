@@ -37,4 +37,7 @@ export default class Book implements IProduct {
       return bookEntity[0];
     }
   }
+  async addProductToCart(product:IProduct):Promise<any> {
+
+  }
 }
