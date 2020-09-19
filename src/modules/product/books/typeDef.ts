@@ -4,6 +4,7 @@ export const typeDefs = gql`
   type Query {
     findByName(name: String): Book
     findById(id: String): Book
+    booksNamesAndPrices:[Int]
 
   }
   type Mutation {

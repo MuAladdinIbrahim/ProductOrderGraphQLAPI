@@ -1,6 +1,7 @@
 import IProduct from "../IProduct";
 import { injectable } from "inversify";
 import BookModel from "./book.model";
+import "reflect-metadata";
 
 @injectable()
 export default class Book implements IProduct {
@@ -32,10 +33,16 @@ export default class Book implements IProduct {
     return bookEntity;
   }
   async findByName(name: string): Promise<any> {
+    if(!name) return {}
     const bookEntity = await BookModel.find({ name });
     if (bookEntity.length !== 0) {
       return bookEntity[0];
     }
+  }
+  async booksNamesAndPrices(): Promise<any[]> {
+    let prices = await BookModel.find({}).select('price name -_id');
+    if(prices.length===0) return []
+    return prices;
   }
   async addProductToCart(product:IProduct):Promise<any> {
 

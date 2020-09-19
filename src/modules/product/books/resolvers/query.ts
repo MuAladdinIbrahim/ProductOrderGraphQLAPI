@@ -10,5 +10,8 @@ export const query = {
     },
     findById: async (parent:any, {id}:any)=>{
         return await book.findById(id)
+    },
+    booksNamesAndPrices: async (parent:any, args:any)=>{
+        return await book.booksNamesAndPrices()
     }
 }
