@@ -12,7 +12,7 @@ export default interface IProduct {
     findById(id: string):Promise<IProduct>
     // findAndRemove(id: string):Promise<IProduct>
     findByName(name: string):Promise<any>
-    addProductToCart(product:IProduct):Promise<any>
+    addToCart(order:any,customer:any,product:any):Promise<any>
     booksNamesAndPrices():Promise<any[]>
 
 }

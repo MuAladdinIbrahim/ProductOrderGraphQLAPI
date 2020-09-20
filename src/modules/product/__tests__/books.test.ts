@@ -5,6 +5,7 @@ declare global {
   namespace jest {
     interface Matchers<R> {
       isEmptyArrayOrObject(expected: any): CustomMatcherResult;
+      isArray(expected:any): CustomMatcherResult;
     }
   }
 }
@@ -21,6 +22,12 @@ expect.extend({
       message: () => `expected null or object and received ${received}`,
     };
   },
+  isBook(received,expected){
+    return {
+        pass: typeof(received)==='object' && !!received.name && !!received.price && !!received.description,
+        message: () => `expected Book object and got ${received}`,
+      };
+  }
 });
 
 describe("should return book", () => {
