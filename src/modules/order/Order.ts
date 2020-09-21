@@ -56,7 +56,7 @@ export default class Order implements IOrder {
     if (order) {
       //add products to existing order
       //TODO update total price
-      orderModel.findByIdAndUpdate(
+      let resultedOrder = await orderModel.findByIdAndUpdate(
         order._id ,
         { $set: { customer: customerId, $push: { products: productId } } },
         (err: any, success: any) => {
@@ -64,11 +64,12 @@ export default class Order implements IOrder {
           if (success) console.log(success);
         }
       );
+      return resultedOrder;
     } else {
       // create new order and add product to it
       let order = await this.createNewOrder();
       //TODO update total price, ship_to:customer.shippingAddress,
-      await orderModel.findByIdAndUpdate(
+      let resultedOrder = await orderModel.findByIdAndUpdate(
         order._id,
         { $set: { customer: customerId, $push: { products: productId } } },
         (err: any, success: any) => {
@@ -76,7 +77,7 @@ export default class Order implements IOrder {
           if (success) console.log(success);
         }
       );
+      return resultedOrder;
     }
-    return order;
   }
 }
