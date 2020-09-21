@@ -10,8 +10,8 @@ export default interface IOrder {
   // delievered_at?:Date
   // ship_to?:String
 
-  placeAnOrder(productId: Schema.Types.ObjectId): any;
-  changeOrderState(order: any, state: string): Promise<any>;
+  placeAnOrder(productId: any): any;
+  changeOrderStatus(order: any, status: string): Promise<any>;
   //   getProductsInOrder(order_no:string):Promise<IProduct[]>
   findNewOrSavedOrderOfCustomer(customerId: any): any;
   addProductToOrder(productId:any,customerId:any): any;

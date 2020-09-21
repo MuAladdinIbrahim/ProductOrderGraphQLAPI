@@ -5,7 +5,10 @@ export const typeDefs = gql`
     getAllOrders:Order
   }
   type Mutation {
-    addProductToOrder(productId:String,customedId:String): Order
+    addProductToOrder(productId:String,customedId:String): Order,
+    saveAnOrder(customedId:String):Order,
+    cancelAnOrder(customedId:String):Order,
+    placeAnOrder(customedId:String):Order,
   }
   type Order {
     status: String
