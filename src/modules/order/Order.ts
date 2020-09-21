@@ -53,29 +53,23 @@ export default class Order implements IOrder {
     //if that order is exist -> add product to it
     //if not -> create order with new status and add product to it
     let order = await this.findNewOrSavedOrderOfCustomer(customerId);
+    console.log("order to be checked",order)
     if (order) {
       //add products to existing order
       //TODO update total price
       let resultedOrder = await orderModel.findByIdAndUpdate(
         order._id ,
-        { $set: { customer: customerId, $push: { products: productId } } },
-        (err: any, success: any) => {
-          if (err) console.log(err);
-          if (success) console.log(success);
-        }
+        {$push: {products:productId},customer:customerId}
       );
       return resultedOrder;
     } else {
+      console.log("in else")
       // create new order and add product to it
       let order = await this.createNewOrder();
       //TODO update total price, ship_to:customer.shippingAddress,
       let resultedOrder = await orderModel.findByIdAndUpdate(
         order._id,
-        { $set: { customer: customerId, $push: { products: productId } } },
-        (err: any, success: any) => {
-          if (err) console.log(err);
-          if (success) console.log(success);
-        }
+        {customer:customerId,$push: {products:productId}}
       );
       return resultedOrder;
     }
