@@ -7,17 +7,16 @@ import { TYPES } from "../../../types";
 import { myContainer } from "../../../inversify.config";
 @injectable()
 export default class Book implements IProduct {
-  private __order: IOrder;
+  @inject(TYPES.IOrder)
+  private __order!: IOrder; 
+
   constructor(
     // public id: string,
     // public name: string,
     // public description: string,
     // public price: number,
     // public category?: string
-    @inject(TYPES.IOrder) order: IOrder
-  ) {
-    this.__order = order;
-  }
+  ) {}
   async add(product: IProduct): Promise<any> {
     console.log(product);
     return await BookModel.create(product);
@@ -51,11 +50,9 @@ export default class Book implements IProduct {
     return prices;
   }
   async addToCart(
-    @inject(TYPES.IOrder) order: IOrder,
     customerId: any,
     productId: any
   ): Promise<any> {
-    this.__order = order;
     await this.__order.addProductToOrder(productId, customerId);
   }
 }

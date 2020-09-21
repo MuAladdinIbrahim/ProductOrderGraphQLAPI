@@ -15,4 +15,6 @@ export default interface IOrder {
   //   getProductsInOrder(order_no:string):Promise<IProduct[]>
   findNewOrSavedOrderOfCustomer(customerId: any): any;
   addProductToOrder(productId:any,customerId:any): any;
+  saveAnOrder(customerId: any):Promise<any>
+  cancelAnOrder(customerId: any):Promise<any>
 }
